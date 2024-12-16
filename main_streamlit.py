@@ -21,11 +21,11 @@ input_instruction = st.sidebar.text_area(
     "The most important words are emotional words."
 )
 
-default_instruction = st.sidebar.text_area(
-    "Default instruction",
-    "You should select only drinks and food as most important words.",
-    disabled=True,
-)
+# default_instruction = st.sidebar.text_area(
+#     "Default instruction",
+#     "You should select only drinks and food as most important words.",
+#     disabled=True,
+# )
 
 
 temperature = st.sidebar.slider("Temperature", min_value=0.0, max_value=1.0, value=0.7, step=0.01)
@@ -38,25 +38,23 @@ input_text = st.text_area(
 )
 
 if input_instruction == '':
-    input_instruction = 'User instructions are empty.'
+    input_instruction = 'Input instructions are empty.'
 else:
-    input_instruction = f'User instruction: {input_instruction}.'
+    input_instruction = f'Input instruction: {input_instruction}.'
 
 # Initialize session state variables
 if "history" not in st.session_state:
     st.session_state["history"] = []  # Stores the history of requests and responses
 
-# Submit button
 if st.button("Send Request"):
-    # Prepare messages for the OpenAI API
     messages = [
         {
             "role": "system",
             "content": "You are an assistant for subtitles generation software. "
                        "Extract the most important words from user input. "
-                       "Default instruction: You should select only drinks and food as most important words."
+                       "Default instruction: You should select pictorial words important words."
                        f"{input_instruction}"
-                       "Prioritize user instructions if they are not empty over default ones"
+                       "Use input instructions if they are not empty instead of default ones"
                        "Return the output as a list of selected words."
         },
         {

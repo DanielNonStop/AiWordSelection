@@ -16,9 +16,15 @@ st.sidebar.header("Input Parameters")
 
 model = st.sidebar.selectbox("Choose a model", options=["gpt-4o-mini", "gpt-4o"])
 
+default_instruction = \
+    "You are an assistant for subtitles generation software. " \
+    "Extract the most important words from user input text. " \
+    "Instruction: You must select pictorial words as important words." \
+    "Return the output as a list of selected words."
+
 input_instruction = st.sidebar.text_area(
-    "Input Instruction",
-    "The most important words are emotional words."
+    "Input Prompt",
+    default_instruction
 )
 
 # default_instruction = st.sidebar.text_area(
@@ -38,9 +44,7 @@ input_text = st.text_area(
 )
 
 if input_instruction == '':
-    input_instruction = 'Input instructions are empty.'
-else:
-    input_instruction = f'Input instruction: {input_instruction}.'
+    input_instruction = default_instruction
 
 # Initialize session state variables
 if "history" not in st.session_state:
@@ -50,12 +54,7 @@ if st.button("Send Request"):
     messages = [
         {
             "role": "system",
-            "content": "You are an assistant for subtitles generation software. "
-                       "Extract the most important words from user input. "
-                       "Default instruction: You should select pictorial words important words."
-                       f"{input_instruction}"
-                       "Use input instructions if they are not empty instead of default ones"
-                       "Return the output as a list of selected words."
+            "content": input_instruction
         },
         {
             "role": "user",

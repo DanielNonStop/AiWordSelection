@@ -19,12 +19,13 @@ model = st.sidebar.selectbox("Choose a model", options=["gpt-4o-mini", "gpt-4o"]
 default_instruction = \
     "You are an assistant for subtitles generation software. " \
     "Extract the most important words from user input text. " \
-    "Instruction: You must select pictorial words as important words." \
+    "Instruction: you must select pictorial words as important words. " \
     "Return the output as a list of selected words."
 
 input_instruction = st.sidebar.text_area(
     "Input Prompt",
-    default_instruction
+    default_instruction,
+    height=250
 )
 
 # default_instruction = st.sidebar.text_area(
